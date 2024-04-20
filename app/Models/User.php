@@ -68,6 +68,6 @@ class User extends Authenticatable
 
     public function bankAccounts(): BelongsToMany
     {
-        return $this->belongsToMany(BankAccount::class);
+        return $this->belongsToMany(BankAccount::class, 'user_bank_account');
     }
 }
