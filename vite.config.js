@@ -19,4 +19,11 @@ export default defineConfig({
         }),
         quasar(),
     ],
+    css: {
+        preprocessorOptions: {
+            sass: {
+                // Additional SaaS options here
+            },
+        },
+    },
 });

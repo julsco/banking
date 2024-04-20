@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@quasar/extras": "^1.16.11",
-        "quasar": "^2.15.3"
+        "quasar": "^2.15.3",
+        "saas": "^1.0.0"
     }
 }

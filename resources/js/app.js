@@ -1,6 +1,7 @@
 import './bootstrap';
 import 'quasar/dist/quasar.css'
 import '../css/app.css';
+import '../saas/global.scss'
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
