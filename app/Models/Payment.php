@@ -15,9 +15,9 @@ class Payment extends Model
         'bank_account_id',
     ];
 
-    public function paymentType(): BelongsTo
+    public function paymentCategory(): BelongsTo
     {
-        return $this->belongsTo(PaymentType::class);
+        return $this->belongsTo(PaymentCategory::class);
     }
 
     public function bankAccount(): BelongsTo
