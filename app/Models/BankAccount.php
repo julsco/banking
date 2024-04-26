@@ -34,6 +34,11 @@ class BankAccount extends Model
         return $this->belongsTo(CardType::class);
     }
 
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_bank_account');
