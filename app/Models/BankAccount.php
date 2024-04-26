@@ -15,6 +15,7 @@ class BankAccount extends Model
     protected $fillable = [
         'bank_id',
         'card_type_id',
+        'currency_id',
         'account_number',
         'sort_code',
     ];

@@ -48,6 +48,15 @@
                 clearable
             />
 
+            <q-select
+                v-model="currency"
+                :options="allCurrencies"
+                label="Currency"
+                class="w-56"
+                :loading="isAllCurrenciesLoading"
+                clearable
+            />
+
 
             <q-btn
                 @click="createBankAccount"
@@ -130,7 +139,10 @@ export default {
             isAllBanksLoading: true,
             bank: null,
             allBanks: [],
+            allCurrencies: [],
+            isAllCurrenciesLoading: true,
             cardType: null,
+            currency: null,
             allCardTypes: [],
             isAllCardTypesLoading: true,
             isProcessing: false,
@@ -151,6 +163,7 @@ export default {
         this.getAllCardTypes();
         this.getAllUsers();
         this.getAllPaymentCategories();
+        this.getAllCurrencies();
     },
     methods:{
         resetForm(){
@@ -173,6 +186,7 @@ export default {
                 'sort_code': this.sortCode,
                 'bank_id': this.bank.id,
                 'card_type_id': this.cardType.id,
+                'currency_id': this.currency.id,
                 'user_ids': this.selectedUsers.map(user => user.id),
             })
                 .then(() => {
@@ -184,6 +198,21 @@ export default {
                 .finally(() => {
                     this.isProcessing = false;
                 })
+        },
+        getAllCurrencies(){
+            axios.get('/api/currencies')
+                .then(response => {
+                    this.allCurrencies = response.data.map(currency => ({
+                        id: currency.id,
+                        label: currency.name
+                    }));
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+                .finally(() => {
+                    this.isAllCurrenciesLoading = false;
+                });
         },
         getAllBanks() {
             axios.get('/api/banks')

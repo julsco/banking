@@ -12,6 +12,7 @@ class BankAccountRequest extends FormRequest
             'sort_code' => 'required|string',
             'bank_id' => 'required|integer',
             'card_type_id' => 'required|integer',
+            'currency_id' => 'required|integer',
             'user_ids' => 'required|array',
             'id' => ['nullable', 'integer'],
         ];
