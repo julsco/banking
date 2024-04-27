@@ -172,6 +172,7 @@ export default {
             this.accountNumber = null;
             this.sortCode = null;
             this.cardType = null;
+            this.currency = null;
         },
         resetPaymentForm(){
             this.paymentCategory = null;
