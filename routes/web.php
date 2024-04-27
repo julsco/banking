@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+# Home page
+Route::get('/', function (Redirector $redirector) {
+    return $redirector->to('/login')
+        ->withHeaders(['X-Inertia-Location' => '/login']);
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])
