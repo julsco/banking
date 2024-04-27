@@ -1,5 +1,5 @@
 <template>
-    <AppLayout title="Dashboard">
+    <BankingLayout>
         <q-form>
             <q-select
                 v-model="selectedUsers"
@@ -122,14 +122,16 @@
                 />
             </div>
         </div>
-    </AppLayout>
+    </BankingLayout>
 </template>
 
 <script>
 import AppLayout from '@/Layouts/AppLayout.vue';
+import BankingLayout from "@/Layouts/BankingLayout.vue";
 export default {
     name: 'Dashboard',
     components: {
+        BankingLayout,
         AppLayout,
     },
     data(){
