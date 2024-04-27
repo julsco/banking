@@ -67,6 +67,7 @@ export default {
     },
     data(){
         return{
+            currentUserId: this.$page.props.auth.user.id,
             paymentDescription: '',
             paymentCategory: null,
             isPaymentCategoriesLoading: true,
@@ -74,12 +75,27 @@ export default {
             paymentDate: '',
             paymentAmount: null,
             isProcessingPayment: false,
+            userBankAccounts: [],
+            isUserBankAccountsLoading: true,
         }
     },
     created() {
         this.getAllPaymentCategories();
+        this.getBankAccountsForUser();
     },
     methods:{
+        getBankAccountsForUser() {
+            axios.get(`/api/bank-accounts/${this.currentUserId}`)
+                .then(response => {
+                    this.userBankAccounts = response.data;
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+                .finally(() => {
+                    this.isUserBankAccountsLoading = false;
+                })
+        },
         resetPaymentForm(){
             this.paymentCategory = null;
             this.paymentDate = null;

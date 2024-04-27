@@ -18,7 +18,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     ->group(function () {
 //        Route::post('/bank-account/create', [BankAccountController::class, 'create']);
     });
-Route::post('/bank-account/create', [BankAccountController::class, 'create']);
+Route::post('/bank-accounts/create', [BankAccountController::class, 'create']);
+Route::get('/bank-accounts/{user_id}', [BankAccountController::class, 'getBankAccountsForUser']);
 Route::get('/banks', [BankController::class, 'index']);
 Route::get('/currencies', [CurrencyController::class, 'index']);
 Route::get('/card-types', [CardTypeController::class, 'index']);

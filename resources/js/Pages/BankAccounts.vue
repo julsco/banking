@@ -114,7 +114,7 @@ export default {
         },
         createBankAccount() {
             this.isProcessing = true;
-            axios.post('/api/bank-account/create', {
+            axios.post('/api/bank-accounts/create', {
                 'account_number': this.accountNumber,
                 'sort_code': this.sortCode,
                 'bank_id': this.bank.id,
