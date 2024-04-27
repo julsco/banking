@@ -24,7 +24,7 @@
                 <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
                     <q-list padding>
                         <div v-for="(navItem, i) in mainNavItems" :key="i">
-                            <q-item clickable v-ripple>
+                            <q-item clickable v-ripple @click="$inertia.visit(navItem.href)">
                                 <q-item-section avatar>
                                     <i class="fa-solid cursor-pointer" :class="navItem.icon"/>
                                 </q-item-section>
@@ -37,8 +37,9 @@
 
                         <q-separator />
 
+                        <!-- Utility icons -->
                         <div v-for="(navItem, i) in utilityNavItems" :key="i">
-                            <q-item clickable v-ripple>
+                            <q-item clickable v-ripple @click="$inertia.visit(navItem.href)">
                                 <q-item-section avatar>
                                     <i class="fa-solid cursor-pointer" :class="navItem.icon"/>
                                 </q-item-section>
@@ -48,6 +49,15 @@
                                 </q-item-section>
                             </q-item>
                         </div>
+
+                        <!-- Logout -->
+                        <q-item clickable v-ripple @click="logout">
+                            <q-item-section avatar>
+                                <i class="fa-solid fa-right-from-bracket cursor-pointer"/>
+                            </q-item-section>
+
+                            <q-item-section>Logout</q-item-section>
+                        </q-item>
                     </q-list>
                 </q-scroll-area>
             </q-drawer>
@@ -62,6 +72,8 @@
 </template>
 
 <script>
+import {router} from "@inertiajs/vue3";
+
 export default {
     name: 'BankingLayout',
     data() {
@@ -84,15 +96,15 @@ export default {
                 {
                     title: 'Settings',
                     icon: 'fa-gear',
-                    href: '/settings',
-                },
-                {
-                    title: 'Logout',
-                    icon: 'fa-right-from-bracket',
-                    href: '/settings',
+                    href: '/user/profile',
                 },
             ],
         };
+    },
+    methods:{
+        logout() {
+            router.post(route('logout'));
+        },
     },
 }
 </script>
