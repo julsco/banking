@@ -1,8 +1,8 @@
 import './bootstrap';
-import 'quasar/dist/quasar.css'
 import '@fortawesome/fontawesome-free/css/all.css';
 import '../css/app.css';
 import '../saas/global.scss'
+import 'quasar/dist/quasar.css'
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
