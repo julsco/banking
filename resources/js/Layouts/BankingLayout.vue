@@ -24,7 +24,8 @@
                 <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
                     <q-list padding>
                         <div v-for="(navItem, i) in mainNavItems" :key="i">
-                            <q-item clickable v-ripple @click="$inertia.visit(navItem.href)">
+                            <q-item clickable v-ripple @click="$inertia.visit(navItem.href)"
+                                    :active="activePage(navItem.href)">
                                 <q-item-section avatar>
                                     <i class="fa-solid cursor-pointer" :class="navItem.icon"/>
                                 </q-item-section>
@@ -39,7 +40,8 @@
 
                         <!-- Utility icons -->
                         <div v-for="(navItem, i) in utilityNavItems" :key="i">
-                            <q-item clickable v-ripple @click="$inertia.visit(navItem.href)">
+                            <q-item clickable v-ripple @click="$inertia.visit(navItem.href)"
+                                    :active="activePage(navItem.href)">
                                 <q-item-section avatar>
                                     <i class="fa-solid cursor-pointer" :class="navItem.icon"/>
                                 </q-item-section>
@@ -80,6 +82,7 @@ export default {
         return {
             drawer: false,
             miniState: true,
+            currentUrl: this.$page.url,
             mainNavItems: [
                 {
                     title: 'Dashboard',
@@ -101,10 +104,13 @@ export default {
             ],
         };
     },
-    methods:{
+    methods: {
         logout() {
             router.post(route('logout'));
         },
+        activePage(href) {
+            return this.$page.url === href;
+        }
     },
 }
 </script>
