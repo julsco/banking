@@ -1,9 +1,9 @@
 <template>
     <BankingLayout>
-        <div class="flex flex-col items-center gap-5">
-            <AddPayment :bank-account-id="mainBankAccount.id" v-if="!isUserBankAccountsLoading"/>
-            <AccountPayments v-if="!isUserBankAccountsLoading"
-                             :payments="mainBankAccount.payments"
+        <div class="flex flex-col items-center gap-5" v-if="!isUserBankAccountsLoading">
+            <BankCard :bank-account="mainBankAccount"/>
+            <AddPayment :bank-account-id="mainBankAccount.id"/>
+            <AccountPayments :payments="mainBankAccount.payments"
                              :currency-symbol="mainBankAccount.currency.symbol"
             />
         </div>
@@ -14,9 +14,11 @@
 import BankingLayout from "@/Layouts/BankingLayout.vue";
 import AddPayment from "@/Pages/dashboard/components/AddPayment.vue";
 import AccountPayments from "@/Pages/dashboard/components/AccountPayments.vue";
+import BankCard from "@/Pages/dashboard/components/BankCard.vue";
 export default {
     name: 'Dashboard',
     components: {
+        BankCard,
         AccountPayments,
         AddPayment,
         BankingLayout,
@@ -37,7 +39,6 @@ export default {
             axios.get(`/api/bank-accounts/${this.currentUserId}`)
                 .then(response => {
                     this.userBankAccounts = response.data;
-                    console.log(this.userBankAccounts)
                     this.mainBankAccount = this.userBankAccounts[0];
                 })
                 .catch(error => {

@@ -13,22 +13,19 @@
 
         <!-- Amount -->
         <div class="payment__amount">
-            {{ getAmountSign(payment.amount) }} {{ currencySymbol }} {{ payment.amount }}
+            {{ getSign(payment.amount) }} {{ currencySymbol }} {{ payment.amount }}
         </div>
     </div>
 </template>
 
 <script>
+import helpers from "@/helpers"
 export default {
     name: "Payment",
+    mixins: [helpers],
     props: {
         payment: Object,
         currencySymbol: String,
-    },
-    methods: {
-        getAmountSign(amount) {
-            return amount > 0 ? '+' : (amount < 0 ? '-' : '');
-        },
     },
 }
 </script>

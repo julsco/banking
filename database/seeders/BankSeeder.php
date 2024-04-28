@@ -14,9 +14,9 @@ class BankSeeder extends Seeder
     public function run(): void
     {
         $banks = [
-            ['name' => 'Nationwide', 'text_color' => '#ffff', 'bg_color' => '#011546'],
-            ['name' => 'First Direct', 'text_color' => '#ffff', 'bg_color' => '#0000',],
-            ['name' => 'Monzo', 'text_color' => '#ffff', 'bg_color' => '#ff4f40',],
+            ['name' => 'Nationwide', 'text_color' => '#ffffff', 'bg_color' => '#011546'],
+            ['name' => 'First Direct', 'text_color' => '#ffffff', 'bg_color' => '#000000',],
+            ['name' => 'Monzo', 'text_color' => '#ffffff', 'bg_color' => '#ff4f40',],
         ];
 
 

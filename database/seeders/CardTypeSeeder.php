@@ -21,7 +21,7 @@ class CardTypeSeeder extends Seeder
         foreach ($cardTypes as $cardType) {
             CardType::updateOrCreate(
                 ['name' => $cardType],
-                ['logo_path' => "/$cardType.png",]
+                ['logo_path' => "/images/logos/card-types/$cardType.svg",]
             );
         }
     }

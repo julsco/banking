@@ -1,0 +1,24 @@
+.bank-card {
+    width: 18rem;
+    height: 11rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    justify-content: space-between;
+
+    &__bank-name {
+        margin-left: auto;
+        margin-bottom: auto;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    &__card-type {
+        width: 30%;
+        height: auto;
+        justify-self: flex-end;
+        margin-left: auto;
+        margin-top: auto;
+    }
+}

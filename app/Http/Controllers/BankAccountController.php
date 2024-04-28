@@ -39,7 +39,7 @@ class BankAccountController extends Controller
         try {
             $user = User::find($userId);
             $bankAccounts = $user->bankAccounts()
-                ->with('currency', 'payments', 'payments.paymentCategory')
+                ->with('currency', 'bank', 'cardType', 'payments', 'payments.paymentCategory')
                 ->get();
 
             return response()->json($bankAccounts);
