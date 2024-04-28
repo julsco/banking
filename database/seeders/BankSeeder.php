@@ -14,15 +14,22 @@ class BankSeeder extends Seeder
     public function run(): void
     {
         $banks = [
-            'Nationwide',
-            'First Direct',
-            'Monzo',
+            ['name' => 'Nationwide', 'text_color' => '#ffff', 'bg_color' => '#011546'],
+            ['name' => 'First Direct', 'text_color' => '#ffff', 'bg_color' => '#0000',],
+            ['name' => 'Monzo', 'text_color' => '#ffff', 'bg_color' => '#ff4f40',],
         ];
 
+
+
         foreach ($banks as $bank) {
+            $bankName = $bank['name'];
             Bank::updateOrCreate(
-                ['name' => $bank],
-                ['logo_path' => "/$bank.png",]
+                ['name' => $bankName],
+                [
+                    'logo_path' => "/$bankName.png",
+                    'text_color' => $bank['text_color'],
+                    'bg_color' => $bank['bg_color'],
+                ]
             );
         }
     }
