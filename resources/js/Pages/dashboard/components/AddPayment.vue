@@ -1,73 +1,79 @@
 <template>
-    <div class="banking-card flex flex-col gap-2">
-        <div class="flex items-center gap-4">
-            <div class="w-56">Description</div>
-            <div class="w-56">Category</div>
-            <div class="w-36">Amount</div>
-            <div class="w-56">Date</div>
-        </div>
+    <BankingSection>
+        <template #title>Add Payment</template>
+        <template #content>
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-4">
+                    <div class="w-56">Description</div>
+                    <div class="w-56">Category</div>
+                    <div class="w-36">Amount</div>
+                    <div class="w-56">Date</div>
+                </div>
 
-        <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4">
 
-            <!-- Description -->
-            <ClassicInput
-                :prev-input-text="paymentDescription"
-                :label="'Description'"
-                :width-class="'w-56'"
-                @update-input="paymentDescription = $event"
-            />
+                    <!-- Description -->
+                    <ClassicInput
+                        :prev-input-text="paymentDescription"
+                        :label="'Description'"
+                        :width-class="'w-56'"
+                        @update-input="paymentDescription = $event"
+                    />
 
-            <!-- Category -->
-            <SingleSelect
-                :is-loading="isPaymentCategoriesLoading"
-                :all-options="paymentCategories"
-                :label="'Category'"
-                :prev-selected-item="paymentCategory"
-                :width-class="'w-56'"
-                @update-selected-item="paymentCategory = $event"
-            />
+                    <!-- Category -->
+                    <SingleSelect
+                        :is-loading="isPaymentCategoriesLoading"
+                        :all-options="paymentCategories"
+                        :label="'Category'"
+                        :prev-selected-item="paymentCategory"
+                        :width-class="'w-56'"
+                        @update-selected-item="paymentCategory = $event"
+                    />
 
-            <!-- Amount -->
-            <InputMoney
-                :prev-input-text="paymentAmount"
-                :label="'Amount'"
-                :width-class="'w-36'"
-                @update-input="paymentAmount = $event"
-            />
+                    <!-- Amount -->
+                    <InputMoney
+                        :prev-input-text="paymentAmount"
+                        :label="'Amount'"
+                        :width-class="'w-36'"
+                        @update-input="paymentAmount = $event"
+                    />
 
-            <q-input filled outlined v-model="paymentDate" mask="####-##-##" :rules="['date']" bg-color="white" color="teal"
-            >
-                <template v-slot:append>
-                    <q-icon name="fa-solid fa-calendar-days" class="cursor-pointer">
-                        <q-popup-proxy>
-                            <q-date v-model="paymentDate"
-                                    mask="YYYY-MM-DD"
-                            >
-                                <div class="row items-center justify-end">
-                                    <q-btn v-close-popup label="Close" color="primary" flat/>
-                                </div>
-                            </q-date>
-                        </q-popup-proxy>
-                    </q-icon>
-                </template>
-            </q-input>
+                    <q-input filled outlined v-model="paymentDate" mask="####-##-##" :rules="['date']" bg-color="white" color="teal"
+                    >
+                        <template v-slot:append>
+                            <q-icon name="fa-solid fa-calendar-days" class="cursor-pointer">
+                                <q-popup-proxy>
+                                    <q-date v-model="paymentDate"
+                                            mask="YYYY-MM-DD"
+                                    >
+                                        <div class="row items-center justify-end">
+                                            <q-btn v-close-popup label="Close" color="primary" flat/>
+                                        </div>
+                                    </q-date>
+                                </q-popup-proxy>
+                            </q-icon>
+                        </template>
+                    </q-input>
 
-            <q-btn
-                @click="createPayment"
-                :disable="isProcessingPayment"
-                color="primary"
-                label="Add Payment"
-                no-caps
-            />
-        </div>
-    </div>
+                    <q-btn
+                        @click="createPayment"
+                        :disable="isProcessingPayment"
+                        color="primary"
+                        label="Add Payment"
+                        no-caps
+                    />
+                </div>
+            </div>
+        </template>
+    </BankingSection>
 </template>
 
 <script>
-import SingleSelect from "@/Pages/global/SingleSelect.vue";
-import InputClassic from "@/Pages/global/ClassicInput.vue";
-import ClassicInput from "@/Pages/global/ClassicInput.vue";
-import InputMoney from "@/Pages/global/MoneyInput.vue";
+import SingleSelect from "@/Pages/global/input-controls/SingleSelect.vue";
+import InputClassic from "@/Pages/global/input-controls/ClassicInput.vue";
+import ClassicInput from "@/Pages/global/input-controls/ClassicInput.vue";
+import InputMoney from "@/Pages/global/input-controls/MoneyInput.vue";
+import BankingSection from "@/Pages/global/shared/BankingSection.vue";
 
 export default {
     name: "AddPayment",
@@ -75,6 +81,7 @@ export default {
         bankAccountId: Number,
     },
     components: {
+        BankingSection,
         InputMoney,
         ClassicInput,
         InputClassic,
