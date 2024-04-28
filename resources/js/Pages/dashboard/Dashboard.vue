@@ -4,6 +4,7 @@
             <AddPayment :bank-account-id="mainBankAccount.id" v-if="!isUserBankAccountsLoading"/>
             <AccountPayments v-if="!isUserBankAccountsLoading"
                              :payments="mainBankAccount.payments"
+                             :currency-symbol="mainBankAccount.currency.symbol"
             />
         </div>
     </BankingLayout>
