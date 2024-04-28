@@ -13,26 +13,28 @@ class PaymentCategorySeeder extends Seeder
     public function run(): void
     {
         $paymentCategories = [
-            'Salary',
-            'Interest',
-            'Groceries',
-            'Utilities',
-            'Rent/Mortgage',
-            'Insurance',
-            'Transportation',
-            'Dining',
-            'Entertainment',
-            'Shopping',
-            'Healthcare',
-            'Education',
-            'Holidays',
-            'Investments',
-            'Miscellaneous',
+            ['name' => 'Salary', 'icon' => 'fa-hand-holding-dollar'],
+            ['name' => 'Interest', 'icon' => 'fa-percent'],
+            ['name' => 'Groceries', 'icon' => 'fa-cart-shopping'],
+            ['name' => 'Utilities', 'icon' => 'fa-bolt'],
+            ['name' => 'Rent/Mortgage', 'icon' => 'fa-house-user'],
+            ['name' => 'Insurance', 'icon' => 'fa-shield'],
+            ['name' => 'Transportation', 'icon' => 'fa-car'],
+            ['name' => 'Cafe & Restaurant', 'icon' => 'fa-mug-hot'],
+            ['name' => 'Entertainment', 'icon' => 'fa-icons'],
+            ['name' => 'Shopping', 'icon' => 'fa-bag-shopping'],
+            ['name' => 'Healthcare', 'icon' => 'fa-briefcase-medical'],
+            ['name' => 'Education', 'icon' => 'fa-user-graduate'],
+            ['name' => 'Child Activity', 'icon' => 'fa-baseball-bat-ball'],
+            ['name' => 'Holidays', 'icon' => 'fa-umbrella-beach'],
+            ['name' => 'Investments', 'icon' => 'fa-sack-dollar'],
+            ['name' => 'Miscellaneous', 'icon' => 'fa-circle-question'],
         ];
 
-        foreach ($paymentCategories as $paymentCategory) {
+        foreach ($paymentCategories as $category) {
             PaymentCategory::updateOrCreate(
-                ['name' => $paymentCategory],
+                ['name' => $category['name']],
+                ['icon' => $category['icon']],
             );
         }
     }

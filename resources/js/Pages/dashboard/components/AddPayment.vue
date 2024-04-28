@@ -71,6 +71,9 @@ import InputMoney from "@/Pages/global/MoneyInput.vue";
 
 export default {
     name: "AddPayment",
+    props: {
+        bankAccountId: Number,
+    },
     components: {
         InputMoney,
         ClassicInput,
@@ -118,7 +121,7 @@ export default {
             this.isProcessingPayment = true;
             axios.post('/api/payment/create', {
                 'payment_category_id': this.paymentCategory.id,
-                'bank_account_id': 7,
+                'bank_account_id': this.bankAccountId,
                 'description': this.paymentDescription,
                 'amount': this.paymentAmount,
                 'date': this.paymentDate,
