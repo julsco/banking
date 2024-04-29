@@ -50,4 +50,23 @@ class BankAccountController extends Controller
             return response()->json($e, 500);
         }
     }
+
+    public function setMainBankAccount(int $bankAccountId): JsonResponse
+    {
+        try {
+            $user = auth()->user();
+            if ($user->mainBankAccount()->exists()) {
+                $user->mainBankAccount()->updateExistingPivot(null, ['is_main' => false]);
+            }
+            $mainBankAccount = BankAccount::find($bankAccountId);
+            $user->setMainBankAccount($mainBankAccount);
+
+            return response()->json('Successfully set main bank account');
+        } catch (Throwable $e) {
+            $errorMessage = "Error setting main bank account for user_id $user->id";
+            Log::error($errorMessage);
+
+            return response()->json($e, 500);
+        }
+    }
 }

@@ -70,4 +70,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(BankAccount::class, 'user_bank_account');
     }
+
+    public function mainBankAccount(): BelongsToMany
+    {
+        return $this->belongsToMany(BankAccount::class, 'user_bank_account')
+            ->wherePivot('is_main', true);
+    }
+
+    public function setMainBankAccount(BankAccount $bankAccount)
+    {
+        $this->bankAccounts()->updateExistingPivot($bankAccount->id, ['is_main' => true]);
+    }
 }
