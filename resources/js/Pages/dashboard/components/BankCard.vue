@@ -21,8 +21,8 @@
                 <div class="flex items-center justify-between">
                     <!-- Account Number / Sort Code -->
                     <div class="flex flex-col gap-1">
-                        <div>{{ bankAccount.account_number }}</div>
-                        <div>{{ bankAccount.sort_code }}</div>
+                        <div>Account number: {{ bankAccount.account_number }}</div>
+                        <div>Sort Code: {{ bankAccount.sort_code }}</div>
                     </div>
                     <!-- Card Type Logo -->
                     <img
