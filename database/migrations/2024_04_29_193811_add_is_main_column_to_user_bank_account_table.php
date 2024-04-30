@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('user_bank_account', function (Blueprint $table) {
             $table->boolean('is_main')->default(false)->after('bank_account_id');
-            $table->unique(['user_id', 'is_main'], 'unique_user_main_account');
         });
     }
 
