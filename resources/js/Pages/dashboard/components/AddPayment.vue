@@ -32,6 +32,7 @@
 
                     <!-- Amount -->
                     <InputMoney
+                        :currency-symbol="currencySymbol"
                         :prev-input-text="paymentAmount"
                         :label="'Amount'"
                         :width-class="'w-36'"
@@ -79,6 +80,7 @@ export default {
     name: "AddPayment",
     props: {
         bankAccountId: Number,
+        currencySymbol: String,
     },
     components: {
         BankingSection,

@@ -1,13 +1,20 @@
 <template>
+<!--    <q-input-->
+<!--        filled-->
+<!--        v-model="inputText"-->
+<!--        :label="label"-->
+<!--        :class="widthClass"-->
+<!--        mask="$#.##"-->
+<!--        prefix="$"-->
+<!--        reverse-fill-mask-->
+<!--        input-class="text-right"-->
+<!--    />-->
     <q-input
         filled
         v-model="inputText"
         :label="label"
         :class="widthClass"
-        mask="$#.##"
-        prefix="$"
-        reverse-fill-mask
-        input-class="text-right"
+        :prefix="currencySymbol"
     />
 </template>
 
@@ -17,6 +24,7 @@ export default {
     props: {
         prevInputText: String | null,
         label: String,
+        currencySymbol: String,
         widthClass: {
             type: String,
             default: 'w-44',

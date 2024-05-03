@@ -13,7 +13,7 @@
 
         <!-- Amount -->
         <div class="payment__amount">
-            {{ getSign(payment.amount) }} {{ currencySymbol }} {{ payment.amount }}
+            {{ formattedAmount }}
         </div>
     </div>
 </template>
@@ -27,6 +27,15 @@ export default {
         payment: Object,
         currencySymbol: String,
     },
+    computed: {
+        formattedAmount() {
+            const sign = this.getSign(this.payment.amount);
+            const absolutePayment = Math.abs(this.payment.amount);
+            const formattedPayment = this.formatCurrency(absolutePayment, this.currencySymbol);
+
+            return `${sign} ${formattedPayment}`;
+        }
+    }
 }
 </script>
 

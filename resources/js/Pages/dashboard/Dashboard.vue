@@ -1,8 +1,8 @@
 <template>
     <BankingLayout>
         <div class="flex flex-col items-center gap-5" v-if="!isUserBankAccountsLoading">
-            <BankCard :bank-account="mainBankAccount"/>
-            <AddPayment :bank-account-id="mainBankAccount.id"/>
+            <BankCards :bank-accounts="userBankAccounts"/>
+            <AddPayment :bank-account-id="mainBankAccount.id" :currency-symbol="mainBankAccount.currency.symbol"/>
             <AccountPayments :payments="mainBankAccount.payments"
                              :currency-symbol="mainBankAccount.currency.symbol"
             />
@@ -14,11 +14,11 @@
 import BankingLayout from "@/Layouts/BankingLayout.vue";
 import AddPayment from "@/Pages/dashboard/components/AddPayment.vue";
 import AccountPayments from "@/Pages/dashboard/components/AccountPayments.vue";
-import BankCard from "@/Pages/dashboard/components/BankCard.vue";
+import BankCards from "@/Pages/dashboard/components/BankCards.vue";
 export default {
     name: 'Dashboard',
     components: {
-        BankCard,
+        BankCards,
         AccountPayments,
         AddPayment,
         BankingLayout,
