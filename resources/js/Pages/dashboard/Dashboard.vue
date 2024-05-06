@@ -1,12 +1,23 @@
 <template>
     <BankingLayout>
-        <div class="flex flex-col items-center gap-5" v-if="!isUserBankAccountsLoading">
-            <BankCards :bank-accounts="userBankAccounts"/>
-            <AddPayment :bank-account-id="mainBankAccount.id" :currency-symbol="mainBankAccount.currency.symbol"/>
-            <AccountPayments :payments="mainBankAccount.payments"
-                             :currency-symbol="mainBankAccount.currency.symbol"
-            />
+        <div class="dashboard" v-if="!isUserBankAccountsLoading">
+            <div class="dashboard__cards">
+                <BankCards :bank-accounts="userBankAccounts"/>
+            </div>
+
+            <div class="dashboard__chart">
+                <DashboardGraph/>
+            </div>
+            <div class="dashboard__transactions">
+                <AccountPayments :payments="mainBankAccount.payments"
+                                 :currency-symbol="mainBankAccount.currency.symbol"
+                />
+            </div>
+            <div class="dashboard__categories">
+                <Categories/>
+            </div>
         </div>
+<!--        <AddPayment :bank-account-id="mainBankAccount.id" :currency-symbol="mainBankAccount.currency.symbol"/>-->
     </BankingLayout>
 </template>
 
@@ -15,9 +26,13 @@ import BankingLayout from "@/Layouts/BankingLayout.vue";
 import AddPayment from "@/Pages/dashboard/components/AddPayment.vue";
 import AccountPayments from "@/Pages/dashboard/components/AccountPayments.vue";
 import BankCards from "@/Pages/dashboard/components/BankCards.vue";
+import DashboardGraph from "@/Pages/dashboard/components/DashboardGraph.vue";
+import Categories from "@/Pages/dashboard/components/Categories.vue";
 export default {
     name: 'Dashboard',
     components: {
+        Categories,
+        DashboardGraph,
         BankCards,
         AccountPayments,
         AddPayment,
@@ -51,3 +66,7 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+@import 'resources/saas/pages/dashboard/dashboard';
+</style>

@@ -12,7 +12,7 @@
                 navigation
                 padding
                 arrows
-                height="300px"
+                height="400px"
                 class="bg-transparent"
             >
                 <q-carousel-slide v-for="bankAccount in bankAccounts"

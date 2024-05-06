@@ -1,0 +1,30 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    height: auto;
+    padding: 0 0.5rem 0 0.5rem;
+
+    &__cards {
+        grid-column: span 1;
+        height: 45vh;
+    }
+
+    &__chart {
+        grid-column: span 2;
+        height: 45vh;
+    }
+
+    &__transactions {
+        grid-column: span 1;
+        height: 50vh;
+    }
+
+    &__categories {
+        grid-column: span 2;
+        height: 50vh;
+    }
+}
+
