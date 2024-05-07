@@ -2,7 +2,10 @@
     <BankingSection>
         <template #title>My Cards</template>
         <template #content>
+            <q-skeleton v-if="isUserBankAccountsLoading" height="150px" square />
+
             <q-carousel
+                v-else
                 v-model="slide"
                 transition-prev="slide-right"
                 transition-next="slide-left"
@@ -28,8 +31,8 @@
 
 <script>
 import BankCard from "@/Pages/dashboard/components/BankCard.vue";
-import BankAccounts from "@/Pages/bank-accounts/components/CreateBankAccount.vue";
-import BankingSection from "@/Pages/global/shared/BankingSection.vue";
+import BankingSection from "@/Layouts/BankingSection.vue";
+import { mapState } from "vuex";
 
 export default {
     name: "BankCards",
@@ -37,13 +40,20 @@ export default {
         BankingSection,
         BankCard,
     },
-    props: {
-        bankAccounts: Array,
-    },
     data() {
         return {
-            slide: this.bankAccounts[0].id,
+            slide: null,
         }
+    },
+    computed: {
+        ...mapState('dashboard', {
+            bankAccounts: 'bankAccounts',
+            mainBankAccount: 'mainBankAccount',
+            isUserBankAccountsLoading: 'isUserBankAccountsLoading',
+        }),
+    },
+    created() {
+        this.slide = this.mainBankAccount.id;
     },
 }
 </script>

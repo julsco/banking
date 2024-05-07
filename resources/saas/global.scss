@@ -1,1 +1,13 @@
 @import "colors";
+
+.internal-link {
+    color: $indianRed;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.2s ease-in;
+
+    &:hover {
+        color: $amaranthPurple;
+    }
+}

@@ -21,9 +21,6 @@ export default {
     data(){
         return{
             currentUserId: this.$page.props.auth.user.id,
-            userBankAccounts: [],
-            mainBankAccount: null,
-            isUserBankAccountsLoading: true,
         }
     },
     created() {

@@ -14,5 +14,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'resources/saas/pages/shared/banking-section';
+@import '../../saas/pages/shared/banking-section';
 </style>

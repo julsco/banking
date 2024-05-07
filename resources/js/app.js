@@ -11,6 +11,8 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import {Quasar, Notify, Loading} from 'quasar'
 import quasarIconSet from 'quasar/icon-set/fontawesome-v6'
 
+import store from "./store/store";
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -20,6 +22,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(store)
             .use(Quasar, {
                     iconSet: quasarIconSet,
                     plugins: {

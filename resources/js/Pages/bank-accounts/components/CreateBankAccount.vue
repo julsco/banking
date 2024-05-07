@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import BankingSection from "@/Pages/global/shared/BankingSection.vue";
+import BankingSection from "@/Layouts/BankingSection.vue";
 export default {
     name: 'BankAccounts',
     components: {

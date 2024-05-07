@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import {router} from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 
 export default {
     name: 'BankingLayout',
@@ -110,7 +110,25 @@ export default {
         },
         activePage(href) {
             return this.$page.url === href;
-        }
+        },
+        setUserVariables() {
+            this.$store.commit('userVariables/setUser', this.user);
+        },
+    },
+    computed: {
+        user() { return this.$page.props.auth.user; },
+        currentTeam() { return this.user.current_team; },
+    },
+    created() {
+        this.setUserVariables();
+    },
+    watch: {
+        user: function() {
+            this.$store.commit('userVariables/setUser', this.user);
+        },
+        currentTeam: function(){
+            this.$store.commit('userVariables/setCurrentTeam', this.currentTeam);
+        },
     },
 }
 </script>

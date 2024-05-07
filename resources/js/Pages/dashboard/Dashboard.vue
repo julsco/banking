@@ -1,24 +1,20 @@
 <template>
-    <BankingLayout>
-        <div class="dashboard" v-if="!isUserBankAccountsLoading">
-            <div class="dashboard__cards">
-                <BankCards :bank-accounts="userBankAccounts"/>
-            </div>
-
-            <div class="dashboard__chart">
-                <DashboardGraph/>
-            </div>
-            <div class="dashboard__transactions">
-                <AccountPayments :payments="mainBankAccount.payments"
-                                 :currency-symbol="mainBankAccount.currency.symbol"
-                />
-            </div>
-            <div class="dashboard__categories">
-                <Categories/>
-            </div>
+    <div class="dashboard" v-if="!isUserBankAccountsLoading">
+        <div class="dashboard__cards">
+            <BankCards />
         </div>
-<!--        <AddPayment :bank-account-id="mainBankAccount.id" :currency-symbol="mainBankAccount.currency.symbol"/>-->
-    </BankingLayout>
+
+        <div class="dashboard__chart">
+            <DashboardGraph />
+        </div>
+        <div class="dashboard__transactions">
+            <AccountPayments />
+        </div>
+        <div class="dashboard__categories">
+            <Categories />
+        </div>
+    </div>
+<!--    <AddPayment :bank-account-id="mainBankAccount.id" :currency-symbol="mainBankAccount.currency.symbol"/>-->
 </template>
 
 <script>
@@ -28,8 +24,10 @@ import AccountPayments from "@/Pages/dashboard/components/AccountPayments.vue";
 import BankCards from "@/Pages/dashboard/components/BankCards.vue";
 import DashboardGraph from "@/Pages/dashboard/components/DashboardGraph.vue";
 import Categories from "@/Pages/dashboard/components/Categories.vue";
+import { mapState } from "vuex";
 export default {
     name: 'Dashboard',
+    layout: BankingLayout,
     components: {
         Categories,
         DashboardGraph,
@@ -38,30 +36,17 @@ export default {
         AddPayment,
         BankingLayout,
     },
-    data(){
-        return{
-            currentUserId: this.$page.props.auth.user.id,
-            userBankAccounts: [],
-            mainBankAccount: null,
-            isUserBankAccountsLoading: true,
-        }
-    },
-    created() {
+    mounted() {
         this.getBankAccountsForUser();
+    },
+    computed: {
+        ...mapState('dashboard', {
+            isUserBankAccountsLoading: 'isUserBankAccountsLoading',
+        }),
     },
     methods:{
         getBankAccountsForUser() {
-            axios.get(`/api/bank-accounts/${this.currentUserId}`)
-                .then(response => {
-                    this.userBankAccounts = response.data;
-                    this.mainBankAccount = this.userBankAccounts[0];
-                })
-                .catch(error => {
-                    console.error(error)
-                })
-                .finally(() => {
-                    this.isUserBankAccountsLoading = false;
-                })
+            this.$store.dispatch('dashboard/getBankAccountsForUser');
         },
     },
 }

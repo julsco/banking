@@ -22,4 +22,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::get('/bank-accounts', function () {
             return Inertia::render('bank-accounts/BankAccounts');
         })->name('bankAccounts');
+
+        # All Payments
+        Route::get('/payments', function () {
+            return Inertia::render('global/shared/AllPayments');
+        })->name('payments');
 });

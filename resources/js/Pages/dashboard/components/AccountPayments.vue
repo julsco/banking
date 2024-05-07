@@ -1,9 +1,18 @@
 <template>
     <BankingSection>
-        <template #title>Recent Transactions</template>
+        <template #title>
+            <div class="flex items-center justify-between">
+                <div>Recent Transactions</div>
+                <div class="internal-link"
+                     @click="$inertia.visit(`/payments`)">
+                    See all
+                </div>
+            </div>
+
+        </template>
         <template #content>
-            <div v-for="payment in payments" :key="payment.id">
-                <Payment :payment="payment" :currency-symbol="currencySymbol"/>
+            <div v-for="payment in mainBankAccount?.payments" :key="payment.id">
+                <Payment :payment="payment" :currency-symbol="mainBankAccount?.currency?.symbol"/>
             </div>
         </template>
     </BankingSection>
@@ -11,7 +20,8 @@
 
 <script>
 import Payment from "@/Pages/dashboard/components/Payment.vue";
-import BankingSection from "@/Pages/global/shared/BankingSection.vue";
+import BankingSection from "@/Layouts/BankingSection.vue";
+import { mapState } from "vuex";
 
 export default {
     name: "AccountPayments",
@@ -19,9 +29,10 @@ export default {
         BankingSection,
         Payment,
     },
-    props: {
-        payments: Array,
-        currencySymbol: String,
+    computed: {
+        ...mapState('dashboard', {
+            mainBankAccount: 'mainBankAccount',
+        }),
     },
 }
 </script>

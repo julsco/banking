@@ -74,7 +74,7 @@ import SingleSelect from "@/Pages/global/input-controls/SingleSelect.vue";
 import InputClassic from "@/Pages/global/input-controls/ClassicInput.vue";
 import ClassicInput from "@/Pages/global/input-controls/ClassicInput.vue";
 import InputMoney from "@/Pages/global/input-controls/MoneyInput.vue";
-import BankingSection from "@/Pages/global/shared/BankingSection.vue";
+import BankingSection from "@/Layouts/BankingSection.vue";
 
 export default {
     name: "AddPayment",
