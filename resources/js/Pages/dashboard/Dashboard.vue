@@ -14,7 +14,6 @@
             <Categories />
         </div>
     </div>
-<!--    <AddPayment :bank-account-id="mainBankAccount.id" :currency-symbol="mainBankAccount.currency.symbol"/>-->
 </template>
 
 <script>

@@ -1,72 +1,79 @@
 <template>
-    <BankingSection>
-        <template #title>Add Payment</template>
-        <template #content>
-            <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-4">
-                    <div class="w-56">Description</div>
-                    <div class="w-56">Category</div>
-                    <div class="w-36">Amount</div>
-                    <div class="w-56">Date</div>
-                </div>
+    <q-dialog v-model="displayModal">
+        <div class="h-96">
+            <BankingSection>
+                <template #title>
+                    <div class="flex items-center justify-between">
+                        <div>Add Payment</div>
+                        <i
+                            class="fa-solid fa-xmark fa-lg cursor-pointer"
+                            v-close-popup
+                        />
+                    </div>
+                </template>
+                <template #content>
+                    <div class="flex flex-col gap-4">
 
-                <div class="flex items-center gap-4">
+                        <!-- Description -->
+                        <ClassicInput
+                            :prev-input-text="paymentDescription"
+                            :label="'Description'"
+                            :width-class="'w-full'"
+                            @update-input="paymentDescription = $event"
+                        />
 
-                    <!-- Description -->
-                    <ClassicInput
-                        :prev-input-text="paymentDescription"
-                        :label="'Description'"
-                        :width-class="'w-56'"
-                        @update-input="paymentDescription = $event"
-                    />
+                        <!-- Category -->
+                        <SingleSelect
+                            :is-loading="isPaymentCategoriesLoading"
+                            :all-options="paymentCategories"
+                            :label="'Category'"
+                            :prev-selected-item="paymentCategory"
+                            :width-class="'w-full'"
+                            @update-selected-item="paymentCategory = $event"
+                        />
 
-                    <!-- Category -->
-                    <SingleSelect
-                        :is-loading="isPaymentCategoriesLoading"
-                        :all-options="paymentCategories"
-                        :label="'Category'"
-                        :prev-selected-item="paymentCategory"
-                        :width-class="'w-56'"
-                        @update-selected-item="paymentCategory = $event"
-                    />
+                        <div class="flex gap-4">
+                            <!-- Amount -->
+                            <InputMoney
+                                class="flex-auto"
+                                :currency-symbol="currencySymbol"
+                                :prev-input-text="paymentAmount"
+                                :label="'Amount'"
+                                :width-class="'w-36'"
+                                @update-input="paymentAmount = $event"
+                            />
 
-                    <!-- Amount -->
-                    <InputMoney
-                        :currency-symbol="currencySymbol"
-                        :prev-input-text="paymentAmount"
-                        :label="'Amount'"
-                        :width-class="'w-36'"
-                        @update-input="paymentAmount = $event"
-                    />
+                            <!-- Date -->
+                            <q-input filled outlined v-model="paymentDate" mask="####-##-##" :rules="['date']" color="teal"
+                            >
+                                <template v-slot:append>
+                                    <q-icon name="fa-solid fa-calendar-days" class="cursor-pointer">
+                                        <q-popup-proxy>
+                                            <q-date v-model="paymentDate"
+                                                    mask="YYYY-MM-DD"
+                                            >
+                                                <div class="row items-center justify-end">
+                                                    <q-btn v-close-popup label="Close" color="primary" flat/>
+                                                </div>
+                                            </q-date>
+                                        </q-popup-proxy>
+                                    </q-icon>
+                                </template>
+                            </q-input>
+                        </div>
 
-                    <q-input filled outlined v-model="paymentDate" mask="####-##-##" :rules="['date']" bg-color="white" color="teal"
-                    >
-                        <template v-slot:append>
-                            <q-icon name="fa-solid fa-calendar-days" class="cursor-pointer">
-                                <q-popup-proxy>
-                                    <q-date v-model="paymentDate"
-                                            mask="YYYY-MM-DD"
-                                    >
-                                        <div class="row items-center justify-end">
-                                            <q-btn v-close-popup label="Close" color="primary" flat/>
-                                        </div>
-                                    </q-date>
-                                </q-popup-proxy>
-                            </q-icon>
-                        </template>
-                    </q-input>
-
-                    <q-btn
-                        @click="createPayment"
-                        :disable="isProcessingPayment"
-                        color="primary"
-                        label="Add Payment"
-                        no-caps
-                    />
-                </div>
-            </div>
-        </template>
-    </BankingSection>
+                        <div class="ml-auto">
+                            <PrimaryButton
+                                @click="createPayment"
+                                :loading="isProcessingPayment"
+                                :label="'Add Payment'"
+                            />
+                        </div>
+                    </div>
+                </template>
+            </BankingSection>
+        </div>
+    </q-dialog>
 </template>
 
 <script>
@@ -75,14 +82,17 @@ import InputClassic from "@/Pages/global/input-controls/ClassicInput.vue";
 import ClassicInput from "@/Pages/global/input-controls/ClassicInput.vue";
 import InputMoney from "@/Pages/global/input-controls/MoneyInput.vue";
 import BankingSection from "@/Layouts/BankingSection.vue";
+import PrimaryButton from "@/Pages/global/buttons/PrimaryButton.vue";
 
 export default {
     name: "AddPayment",
     props: {
         bankAccountId: Number,
         currencySymbol: String,
+        showModal: Boolean,
     },
     components: {
+        PrimaryButton,
         BankingSection,
         InputMoney,
         ClassicInput,
@@ -99,6 +109,7 @@ export default {
             paymentDate: '',
             paymentAmount: null,
             isProcessingPayment: false,
+            displayModal: this.showModal,
         }
     },
     created() {
@@ -136,7 +147,7 @@ export default {
                 'date': this.paymentDate,
             })
                 .then(() => {
-                    this.resetPaymentForm();
+                    this.getBankAccountsForUser();
                 })
                 .catch(error => {
                     console.error(error)
@@ -144,6 +155,17 @@ export default {
                 .finally(() => {
                     this.isProcessingPayment = false;
                 })
+        },
+        getBankAccountsForUser() {
+            this.$store.dispatch('dashboard/getBankAccountsForUser')
+                .then(() => {
+                    this.resetPaymentForm();
+                });
+        },
+    },
+    watch: {
+        displayModal() {
+            this.$emit('toggleModal', this.displayModal)
         },
     },
 }

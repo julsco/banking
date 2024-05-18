@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BankAccountRequest;
+use App\Http\Services\BankAccount\BankAccountService;
 use App\Models\BankAccount;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -11,6 +12,13 @@ use Throwable;
 
 class BankAccountController extends Controller
 {
+    private BankAccountService $bankAccountService;
+
+    public function __construct(BankAccountService $bankAccountService)
+    {
+        $this->bankAccountService = $bankAccountService;
+    }
+
     public function create(BankAccountRequest $request): JsonResponse
     {
         $validatedRequest = $request->validated();
@@ -37,10 +45,7 @@ class BankAccountController extends Controller
     public function getBankAccountsForUser(int $userId): JsonResponse
     {
         try {
-            $user = User::find($userId);
-            $bankAccounts = $user->bankAccounts()
-                ->with('currency', 'bank', 'cardType', 'payments', 'payments.paymentCategory')
-                ->get();
+            $bankAccounts = $this->bankAccountService->getBankAccountsForUser($userId);
 
             return response()->json($bankAccounts);
         } catch (Throwable $e) {

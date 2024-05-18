@@ -11,9 +11,28 @@
 
         </template>
         <template #content>
-            <div v-for="payment in mainBankAccount?.payments" :key="payment.id">
-                <Payment :payment="payment" :currency-symbol="mainBankAccount?.currency?.symbol"/>
+            <div class="h-full flex flex-col">
+                <Payment v-for="payment in mainBankAccount?.payments"
+                         :key="payment.id"
+                         :payment="payment"
+                         :currency-symbol="mainBankAccount?.currency?.symbol"
+                />
+
+                <div class="mt-auto flex justify-end w-full">
+                    <PrimaryButton
+                        :label="'+ Add'"
+                        @click="showAddPaymentModal = true"
+                    />
+                </div>
             </div>
+
+            <AddPayment
+                v-if="showAddPaymentModal"
+                :bank-account-id="mainBankAccount.id"
+                :currency-symbol="mainBankAccount.currency.symbol"
+                :show-modal="showAddPaymentModal"
+                @toggle-modal="this.showAddPaymentModal = $event"
+            />
         </template>
     </BankingSection>
 </template>
@@ -22,12 +41,21 @@
 import Payment from "@/Pages/dashboard/components/Payment.vue";
 import BankingSection from "@/Layouts/BankingSection.vue";
 import { mapState } from "vuex";
+import PrimaryButton from "@/Pages/global/buttons/PrimaryButton.vue";
+import AddPayment from "@/Pages/dashboard/components/AddPayment.vue";
 
 export default {
     name: "AccountPayments",
     components: {
+        AddPayment,
+        PrimaryButton,
         BankingSection,
         Payment,
+    },
+    data() {
+        return {
+            showAddPaymentModal: false,
+        }
     },
     computed: {
         ...mapState('dashboard', {

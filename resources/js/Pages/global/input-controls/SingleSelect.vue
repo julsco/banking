@@ -8,10 +8,9 @@
               option-label="name"
               input-debounce="0"
               rounded
-              bg-color="white"
               hide-selected
+              bg-color="grey-3"
               use-input
-              borderless
               fill-input
               clearable
               @filter="filterFn"
