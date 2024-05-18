@@ -3,7 +3,6 @@
         <div class="dashboard__cards">
             <BankCards />
         </div>
-
         <div class="dashboard__chart">
             <DashboardGraph />
         </div>

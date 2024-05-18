@@ -12,6 +12,7 @@ import {Quasar, Notify, Loading} from 'quasar'
 import quasarIconSet from 'quasar/icon-set/fontawesome-v6'
 
 import store from "./store/store";
+import VueApexCharts from "vue3-apexcharts";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -23,6 +24,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(store)
+            .use(VueApexCharts)
             .use(Quasar, {
                     iconSet: quasarIconSet,
                     plugins: {
