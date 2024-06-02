@@ -28,6 +28,7 @@ class PaymentCategorySeeder extends Seeder
             ['name' => 'Child Activity', 'icon' => 'fa-baseball-bat-ball'],
             ['name' => 'Holidays', 'icon' => 'fa-umbrella-beach'],
             ['name' => 'Investments', 'icon' => 'fa-sack-dollar'],
+            ['name' => 'Self-care', 'icon' => 'fa-hand-holding-heart'],
             ['name' => 'Miscellaneous', 'icon' => 'fa-circle-question'],
         ];
 

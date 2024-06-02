@@ -20,6 +20,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     });
 Route::post('/bank-accounts/create', [BankAccountController::class, 'create']);
 Route::get('/bank-accounts/{user_id}', [BankAccountController::class, 'getBankAccountsForUser']);
+Route::get('/categories/total-spending/{bankAccountId}/{startDate}/{endDate}', [BankAccountController::class, 'getSpendingByCategoryForBankAccount']);
 Route::post('/bank-accounts/set-main/{bankAccountId}', [BankAccountController::class, 'setMainBankAccount']);
 Route::get('/banks', [BankController::class, 'index']);
 Route::get('/currencies', [CurrencyController::class, 'index']);
