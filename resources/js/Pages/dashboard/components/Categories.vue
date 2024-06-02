@@ -2,7 +2,15 @@
     <BankingSection>
         <template #title>Total Spend by Category</template>
         <template #content>
-            <CategoriesSpentChart />
+            <div v-for="data in paymentData">
+                {{ `${data.category_name}: ${data.total_amount}` }}
+            </div>
+<!--            <CategoriesSpentChart-->
+<!--                v-if="!isTotalSpendingLoading"-->
+<!--                :categories="categories"-->
+<!--                :total-amounts="totalAmounts"-->
+<!--                :payments-data="paymentData"-->
+<!--            />-->
         </template>
     </BankingSection>
 </template>
@@ -24,6 +32,8 @@ export default {
             startDate: null,
             endDate: null,
             isTotalSpendingLoading: false,
+            paymentData: [],
+            totalAmounts: [],
         }
     },
     computed: {
@@ -39,7 +49,11 @@ export default {
         getTotalSpendingByCategory() {
             this.isTotalSpendingLoading = true;
             return axios.get(`/api/categories/total-spending/${this.mainBankAccount.id}/2024-05-01/2024-05-31`)
-                .then(response => {console.log(response);})
+                .then(response => {
+                    this.paymentData = response.data;
+                    this.categories = this.paymentsData.map(data => data.category_name);
+                    this.totalAmounts = this.paymentsData.map(data => data.total_amount);
+                })
                 .catch(error => console.error(error))
                 .finally(() => this.isTotalSpendingLoading = false)
         },

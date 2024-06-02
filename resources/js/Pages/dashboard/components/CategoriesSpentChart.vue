@@ -11,19 +11,24 @@
 <script>
 export default {
     name: "CategoriesSpentChart",
-    data: function() {
+    props: {
+        paymentsData: Array,
+        categories: Array,
+        totalAmounts: Array,
+    },
+    data () {
         return {
             options: {
                 xaxis: {
-                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+                    categories: this.categories,
                 }
             },
             series: [{
-                name: 'series-1',
-                data: [30, 40, 45, 50, 49, 60, 70, 91]
+                name: 'Total Amount',
+                data: this.totalAmounts,
             }]
         }
-    }
+    },
 }
 </script>
 
