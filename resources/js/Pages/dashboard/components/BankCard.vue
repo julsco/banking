@@ -6,7 +6,7 @@
             <!-- Balance -->
             <div class="flex flex-col gap-2">
                 <div>Balance</div>
-                <div> {{ balance }} </div>
+                <div> {{ formattedBalance }} </div>
             </div>
 
             <!-- Bank Name -->
@@ -41,9 +41,10 @@ export default {
         bankAccount: Object,
     },
     computed: {
-        balance() {
-            const balance = this.bankAccount.payments.reduce((acc, payment) => acc + payment.amount, 0);
+        formattedBalance() {
+            let balance = this.bankAccount.balance;
             const sign = this.getSign(balance)
+            if (balance < 0) balance = Math.abs(balance);
             return sign + this.formatCurrency(balance, this.bankAccount.currency.symbol)
         },
     },

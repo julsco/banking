@@ -21,7 +21,7 @@ class BankAccount extends Model
         'sort_code',
     ];
 
-    protected $appends = ['is_main'];
+    protected $appends = ['is_main', 'balance'];
 
     public function isMain(): Attribute
     {
@@ -29,6 +29,15 @@ class BankAccount extends Model
             get: function() {
                 return $this->users()
                     ->wherePivot('is_main', true)->exists();
+            }
+        );
+    }
+
+    public function balance(): Attribute
+    {
+        return Attribute::make(
+            get: function() {
+                return $this->payments()->sum('amount');
             }
         );
     }
