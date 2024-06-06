@@ -28,3 +28,4 @@ Route::get('/card-types', [CardTypeController::class, 'index']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/payment-categories', [PaymentCategoryController::class, 'index']);
 Route::post('/payment/create', [PaymentController::class, 'create']);
+Route::get('/payments/{bankAccountId}', [PaymentController::class, 'getAllPaymentsForBankAccount']);

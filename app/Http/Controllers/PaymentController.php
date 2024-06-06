@@ -31,4 +31,23 @@ class PaymentController extends Controller
             return response()->json($e, 500);
         }
     }
+
+    public function getAllPaymentsForBankAccount(int $bankAccountId): JsonResponse
+    {
+        try {
+            $payments = Payment::where('bank_account_id', $bankAccountId)
+                ->with('paymentCategory')
+                ->orderBy('date', 'desc')
+                ->get()
+                ->groupBy('date');
+
+            return response()->json($payments);
+
+        } catch (Throwable $e) {
+            $errorMessage = 'Error retrieving payments for bank account';
+            Log::error($errorMessage);
+
+            return response()->json($e, 500);
+        }
+    }
 }
