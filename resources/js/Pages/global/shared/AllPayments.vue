@@ -39,7 +39,7 @@ export default {
     methods: {
         getPaymentsForBankAccount() {
             this.isPaymentsLoading = true;
-            return axios.get(`/api/payments/${8}`)
+            return axios.get(`/api/payments/${1}`)
                 .then(response => this.payments = response.data)
                 .catch(error => console.error(error))
                 .finally(() => this.isPaymentsLoading = false)
