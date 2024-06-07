@@ -17,7 +17,7 @@
 
 <script>
 import BankingSection from "@/Layouts/BankingSection.vue";
-import CategoriesSpentChart from "@/Pages/dashboard/components/CategoriesSpentChart.vue";
+import CategoriesSpentChart from "@/Pages/banking/dashboard/components/CategoriesSpentChart.vue";
 import {mapState} from "vuex";
 
 export default {

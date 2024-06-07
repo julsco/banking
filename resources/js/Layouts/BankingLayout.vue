@@ -93,6 +93,11 @@ export default {
                     title: 'Bank Accounts',
                     icon: 'fa-building-columns',
                     href: '/bank-accounts',
+                },
+                {
+                    title: 'Team Dashboard',
+                    icon: 'fa-people-group',
+                    href: '/team-dashboard',
                 }
             ],
             utilityNavItems: [

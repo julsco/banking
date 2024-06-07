@@ -38,11 +38,11 @@
 </template>
 
 <script>
-import Payment from "@/Pages/dashboard/components/Payment.vue";
+import Payment from "@/Pages/banking/dashboard/components/Payment.vue";
 import BankingSection from "@/Layouts/BankingSection.vue";
 import { mapState } from "vuex";
 import PrimaryButton from "@/Pages/global/buttons/PrimaryButton.vue";
-import AddPayment from "@/Pages/dashboard/components/AddPayment.vue";
+import AddPayment from "@/Pages/banking/dashboard/components/AddPayment.vue";
 
 export default {
     name: "AccountPayments",

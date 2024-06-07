@@ -17,11 +17,11 @@
 
 <script>
 import BankingLayout from "@/Layouts/BankingLayout.vue";
-import AddPayment from "@/Pages/dashboard/components/AddPayment.vue";
-import AccountPayments from "@/Pages/dashboard/components/AccountPayments.vue";
-import BankCards from "@/Pages/dashboard/components/BankCards.vue";
-import DashboardGraph from "@/Pages/dashboard/components/DashboardGraph.vue";
-import Categories from "@/Pages/dashboard/components/Categories.vue";
+import AddPayment from "@/Pages/banking/dashboard/components/AddPayment.vue";
+import AccountPayments from "@/Pages/banking/dashboard/components/AccountPayments.vue";
+import BankCards from "@/Pages/banking/dashboard/components/BankCards.vue";
+import DashboardGraph from "@/Pages/banking/dashboard/components/DashboardGraph.vue";
+import Categories from "@/Pages/banking/dashboard/components/Categories.vue";
 import { mapState } from "vuex";
 export default {
     name: 'Dashboard',
@@ -51,5 +51,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'resources/saas/pages/dashboard/dashboard';
+@import '../../../../saas/pages/dashboard/dashboard';
 </style>

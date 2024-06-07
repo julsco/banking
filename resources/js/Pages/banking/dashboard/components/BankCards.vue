@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import BankCard from "@/Pages/dashboard/components/BankCard.vue";
+import BankCard from "@/Pages/banking/dashboard/components/BankCard.vue";
 import BankingSection from "@/Layouts/BankingSection.vue";
 import { mapState } from "vuex";
 

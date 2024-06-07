@@ -16,7 +16,7 @@
 import helpers from "@/helpers"
 import BankingSection from "@/Layouts/BankingSection.vue";
 import BankingLayout from "@/Layouts/BankingLayout.vue";
-import Payment from "@/Pages/dashboard/components/Payment.vue";
+import Payment from "@/Pages/banking/dashboard/components/Payment.vue";
 
 export default {
     name: "AllPayments",

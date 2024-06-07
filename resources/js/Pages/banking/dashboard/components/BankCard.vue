@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import helpers from "@/helpers"
+import helpers from "@/helpers.js"
 
 export default {
     name: "BankCard",
@@ -52,5 +52,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'resources/saas/pages/dashboard/bank-card';
+@import '../../../../../saas/pages/dashboard/bank-card';
 </style>

@@ -15,13 +15,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     ->group(function () {
         # Dashboard
         Route::get('/dashboard', function () {
-            return Inertia::render('dashboard/Dashboard');
+            return Inertia::render('banking/dashboard/Dashboard');
         })->name('dashboard');
 
         # Bank Accounts
         Route::get('/bank-accounts', function () {
-            return Inertia::render('bank-accounts/BankAccounts');
+            return Inertia::render('banking/bank-accounts/BankAccounts');
         })->name('bankAccounts');
+
+        # Team Dashboard
+        Route::get('/team-dashboard', function () {
+            return Inertia::render('banking/team-dashboard/TeamDashboard');
+        })->name('teamDashboard');
 
         # All Payments
         Route::get('/payments', function () {
